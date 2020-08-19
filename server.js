@@ -4,11 +4,11 @@ const getParsedData = require('./getParsedData');
 
 const app = express();
 
-app.post('/sms', async (req, res) => {
+app.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
-//   message = await getParsedData(); 
-  twiml.message('message'); 
+  message = await getParsedData(); 
+  twiml.message('Hi Tyner'); 
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());

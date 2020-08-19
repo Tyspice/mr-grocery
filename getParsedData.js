@@ -71,7 +71,7 @@ async function parseOneTime() {
 async function getParsedData() {
   try {
     const staples = await parseStaples();
-    // const oneTime = await parseOneTime();
+    const oneTime = await parseOneTime();
     data = [...staples];
     dataString = data.join("");
 
