@@ -21,7 +21,7 @@ async function getSheetValues(sheetName) {
 }
 
 async function parseStaples() {
-  newItems = [' \nNEED\n---------------\n'];
+  newItems = ['\n \nNEED\n---------------\n'];
   try {
     staples1 = await getSheetValues(sheets[0]);
     staples2 = await getSheetValues(sheets[1]);
