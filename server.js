@@ -4,7 +4,7 @@ const getParsedData = require('./getParsedData');
 
 const app = express();
 
-app.post('/sms', async (req, res) => {
+app.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
   message = await getParsedData(); 
@@ -18,4 +18,6 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
-app.listen(port);
+app.listen(port, () => {
+    console.log(`app listening on port: ${port}`)
+});
