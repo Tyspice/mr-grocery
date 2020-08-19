@@ -1,0 +1,28 @@
+const express = require('express');
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const getParsedData = require('./getParsedData');
+
+const app = express();
+
+// app.post('/sms', async (req, res) => {
+//   const twiml = new MessagingResponse();
+
+//   message = await getParsedData(); 
+//   twiml.message(message); 
+
+//   res.writeHead(200, {'Content-Type': 'text/xml'});
+//   res.end(twiml.toString());
+// });
+
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//   port = 8000;
+// }
+// app.listen(port);
+
+async function print() {
+    message = await getParsedData();
+    console.log(message);
+}
+
+print();

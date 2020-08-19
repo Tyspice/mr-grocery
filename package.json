@@ -1,0 +1,19 @@
+{
+  "name": "mr-grocery-v2",
+  "version": "2.0.0",
+  "description": "mr grocery at your sevice",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tyspice",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "googleapis": "^59.0.0",
+    "twilio": "^3.49.0"
+  },
+  "engines": {
+    "node": "12.17.0"
+  }
+}
