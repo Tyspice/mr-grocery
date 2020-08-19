@@ -4,7 +4,7 @@ const getParsedData = require('./getParsedData');
 
 const app = express();
 
-app.post('/sms', async (req, res) => {
+app.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
   message = await getParsedData(); 
