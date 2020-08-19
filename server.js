@@ -8,7 +8,7 @@ app.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
   message = await getParsedData(); 
-  twiml.message('Hi There'); 
+  twiml.message(message); 
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
