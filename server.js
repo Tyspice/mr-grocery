@@ -4,25 +4,18 @@ const getParsedData = require('./getParsedData');
 
 const app = express();
 
-// app.post('/sms', async (req, res) => {
-//   const twiml = new MessagingResponse();
+app.post('/sms', async (req, res) => {
+  const twiml = new MessagingResponse();
 
-//   message = await getParsedData(); 
-//   twiml.message(message); 
+  message = await getParsedData(); 
+  twiml.message(message); 
 
-//   res.writeHead(200, {'Content-Type': 'text/xml'});
-//   res.end(twiml.toString());
-// });
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
+});
 
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//   port = 8000;
-// }
-// app.listen(port);
-
-async function print() {
-    message = await getParsedData();
-    console.log(message);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
 }
-
-print();
+app.listen(port);
