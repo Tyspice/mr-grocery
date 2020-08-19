@@ -58,7 +58,7 @@ async function parseOneTime() {
 
     oneTime.forEach(e => {
       if (e[0] !== 'Item' && e[0]) {
-        newItems.push(`Item: ${e[0]}\nNotes: ${e[1] ? e[1] : "nothin"}\n \n`);
+        newItems.push(`${e[0]}${e[1] ? `\nNotes: ${e[1]}` : ""}\n \n`);
       }
     });
     return newItems;
@@ -83,3 +83,4 @@ async function getParsedData() {
 }
 
 module.exports = getParsedData;
+
