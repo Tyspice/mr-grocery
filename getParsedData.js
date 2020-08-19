@@ -58,7 +58,7 @@ async function parseOneTime() {
 
     oneTime.forEach(e => {
       if (e[0] !== 'Item' && e[0]) {
-        newItems.push(`Item: ${e[0]}\nNotes: ${e[1] ? e[1] : "nothin"}\n---------------\n`);
+        newItems.push(`Item: ${e[0]}\nNotes: ${e[1] ? e[1] : "nothin"}\n`);
       }
     });
     return newItems;
@@ -72,7 +72,7 @@ async function getParsedData() {
   try {
     const staples = await parseStaples();
     const oneTime = await parseOneTime();
-    data = [...staples];
+    data = [...staples, ...oneTime];
     dataString = data.join("");
 
     return dataString;
