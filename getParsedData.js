@@ -58,7 +58,7 @@ async function parseOneTime() {
 
     oneTime.forEach(e => {
       if (e[0] !== 'Item' && e[0]) {
-        newItems.push(`${e[0]}${e[1] ? `\nNotes: ${e[1]}` : ""}\n \n`);
+        newItems.push(`${e[1] ? `${e[0]} (${e[1]})\n` : `${e[0]}\n`}`);
       }
     });
     return newItems;
