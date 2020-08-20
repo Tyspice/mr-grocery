@@ -22,7 +22,7 @@ async function getCatagoryData() {
       });
 
       const string = newItems.join("");
-      console.log(string);
+      return string;
   
     } catch (error) {
       console.log(error.message, error.stack);
