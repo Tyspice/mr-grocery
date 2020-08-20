@@ -1,24 +1,5 @@
-const {
-  getAuthToken,
-  getSpreadSheetValues
-} = require('./googleSheetsHandler.js');
+const { getSheetValues, sheets } = require('./googleSheetsHandler.js');
 
-const spreadsheetId = '18erzz-8FtCqTCfeW5WHl7n2BdHO10cPi8I59rdMjSFU';
-const sheets = ['House Staples', 'JKTT Staples', 'JKTT One-Time Request']
-
-async function getSheetValues(sheetName) {
-  try {
-    const auth = await getAuthToken();
-    const response = await getSpreadSheetValues({
-      spreadsheetId,
-      sheetName,
-      auth
-    })
-    return response.data.values;
-  } catch (error) {
-    console.log(error.message, error.stack);
-  }
-}
 
 async function parseStaples() {
   newItems = [' \n \nNEED\n---------------\n'];
@@ -67,7 +48,7 @@ async function parseOneTime() {
   }
 }
 
-// module.exports = getParsedData;
+
 async function getParsedData() {
   try {
     const staples = await parseStaples();

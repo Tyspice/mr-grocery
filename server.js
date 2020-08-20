@@ -1,13 +1,13 @@
 const express = require('express');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const getParsedData = require('./getParsedData');
+const getCatagoryData = require('./getCatagoryData.js');
 
 const app = express();
 
 app.post('/', async (req, res) => {
   const twiml = new MessagingResponse();
 
-  message = await getParsedData(); 
+  message = await getCatagoryData(); 
   twiml.message(message); 
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
