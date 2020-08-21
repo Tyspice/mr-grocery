@@ -4,44 +4,9 @@ const {
     sheets
 } = require('./googleSheetsHandler.js');
 
-
-// async function getCatagoryData() {
-//     try {
-//       newItems = [];
-//       staples1 = await getSheetValues(sheets[0]);
-//       staples2 = await getSheetValues(sheets[1]);
-//       oneTime = await getSheetValues(sheets[2]);
-//       ranges = await getRanges();
-//       mergedStaples = [...staples1, ...staples2,];
-
-//       ranges.forEach(range => {
-//           newItems.push(`\n${ range.toUpperCase() }\n---------------\n`);
-//           mergedItems.forEach(e =>{
-//               if((e[4] === range) && ((e[1] === 'Out') || (e[1] === 'Low'))) {
-//                 newItems.push(`${e[0]}*\n`);
-//               } else if ((e[4] === range) && (e[1] === 'Could Get More')) {
-//                 newItems.push(`${e[0]}\n`);
-//               }
-//           });
-//       });
-
-//       const string = newItems.join("");
-//       return string;
-
-//     } catch (error) {
-//       console.log(error.message, error.stack);
-//     }
-
-
-//   }
-
-
-async function getCatagoryData() {
+async function objectifyData() {
     try {
-        objArray = [{
-            catagory: 'No Catagory Given',
-            items: []
-        }];
+        objArray = [];
         staples1 = await getSheetValues(sheets[0]);
         staples2 = await getSheetValues(sheets[1]);
         oneTime = await getSheetValues(sheets[2]);
@@ -53,6 +18,10 @@ async function getCatagoryData() {
                 catagory: range,
                 items: []
             })
+        });
+        objArray.push({
+            catagory: 'No Catagory Given',
+            items: []
         });
 
         objArray.forEach(object => {
@@ -66,36 +35,39 @@ async function getCatagoryData() {
             oneTime.forEach(element => {
                 if (object.catagory === element[2]) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
-                } else if ((element[2] === null || element[2] === '') && (object.catagory === 'No Catagory Given')) {
+                } else if (((element[2] === '') || (!element[2])) && (object.catagory === 'No Catagory Given')) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
                 }
             });
         });
-        console.log(objArray);
-
-
-
-
-
-
-
-        //   ranges.forEach(range => {
-        //       newItems.push(`\n${ range.toUpperCase() }\n---------------\n`);
-        //       mergedItems.forEach(e =>{
-        //           if((e[4] === range) && ((e[1] === 'Out') || (e[1] === 'Low'))) {
-        //             newItems.push(`${e[0]}*\n`);
-        //           } else if ((e[4] === range) && (e[1] === 'Could Get More')) {
-        //             newItems.push(`${e[0]}\n`);
-        //           }
-        //       });
-        //   });
-
-        //   const string = newItems.join("");
-        //   return string;
+        // console.log(oneTime);
+        return objArray;
 
     } catch (error) {
         console.log(error.message, error.stack);
     }
 }
-//   module.exports = getCatagoryData;
-getCatagoryData();
+
+async function getCatagoryData() {
+    try {
+        data = await objectifyData();
+        parsedArray = [];
+
+        data.forEach(object => {
+            if (object.items.length !== 0) {
+                parsedArray.push(`\n${ object.catagory.toUpperCase() }\n---------------\n`)
+                object.items.forEach(item => {
+                    parsedArray.push(`${item}\n`)
+                })
+            }
+
+        });
+        parsedString = parsedArray.join("");
+        return parsedString;
+
+    } catch (error) {
+        console.log(error.message, error.stack);
+    }
+}
+
+module.exports = getCatagoryData;
