@@ -12,30 +12,31 @@ async function objectifyData() {
         oneTime = await getSheetValues(sheets[2]);
         ranges = await getRanges();
         mergedStaples = [...staples1, ...staples2, ];
-
+        //init category range obgects
         ranges.forEach(range => {
             objArray.push({
-                catagory: range,
+                category: range,
                 items: []
             })
         });
+        //init end category
         objArray.push({
-            catagory: 'No Category Given',
+            category: 'No Category Given',
             items: []
         });
 
         objArray.forEach(object => {
             mergedStaples.forEach(staple => {
-                if ((object.catagory === staple[4]) && ((staple[1] === 'Out') || (staple[1] === 'Low'))) {
+                if ((object.category === staple[4]) && ((staple[1] === 'Out') || (staple[1] === 'Low'))) {
                     object.items.push(`${staple[0]}*`)
-                } else if ((object.catagory === staple[4]) && (staple[1] === 'Could Get More')) {
+                } else if ((object.category === staple[4]) && (staple[1] === 'Could Get More')) {
                     object.items.push(staple[0])
                 }
             });
             oneTime.forEach(element => {
-                if (object.catagory === element[2]) {
+                if (object.category === element[2]) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
-                } else if (((element[2] === '') || (!element[2])) && (object.catagory === 'No Category Given')) {
+                } else if (((element[2] === '') || (!element[2])) && (object.category === 'No Category Given')) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
                 }
             });
@@ -55,7 +56,7 @@ async function getCategoryData() {
 
         data.forEach(object => {
             if (object.items.length !== 0) {
-                parsedArray.push(`\n${ object.catagory.toUpperCase() }\n---------------\n`)
+                parsedArray.push(`\n${ object.category.toUpperCase() }\n---------------\n`)
                 object.items.forEach(item => {
                     parsedArray.push(`${item}\n`)
                 })
