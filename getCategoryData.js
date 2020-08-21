@@ -20,7 +20,7 @@ async function objectifyData() {
             })
         });
         objArray.push({
-            catagory: 'No Catagory Given',
+            catagory: 'No Category Given',
             items: []
         });
 
@@ -35,7 +35,7 @@ async function objectifyData() {
             oneTime.forEach(element => {
                 if (object.catagory === element[2]) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
-                } else if (((element[2] === '') || (!element[2])) && (object.catagory === 'No Catagory Given')) {
+                } else if (((element[2] === '') || (!element[2])) && (object.catagory === 'No Category Given')) {
                     object.items.push(element[1] ? `${element[0]} (${element[1]})` : element[0])
                 }
             });
@@ -48,7 +48,7 @@ async function objectifyData() {
     }
 }
 
-async function getCatagoryData() {
+async function getCategoryData() {
     try {
         data = await objectifyData();
         parsedArray = [];
@@ -70,4 +70,4 @@ async function getCatagoryData() {
     }
 }
 
-module.exports = getCatagoryData;
+module.exports = getCategoryData;
