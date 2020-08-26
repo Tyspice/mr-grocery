@@ -22,8 +22,10 @@ app.post('/sms', async (req, res) => {
 
 app.get('/api/v2', async (req, res) => {
   data = await objectifyData();
-
-  res.json(data);
+  jsonData = await JSON.stringify(data);
+  
+  res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+  res.json(jsonData);
 
 });
 
