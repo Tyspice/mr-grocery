@@ -4,7 +4,7 @@ const {
     sheets
 } = require('../googleSheets/googleSheetsHandler.js');
 
-async function objectifyData() {
+async function staplesData() {
     try {
         objArray = [];
         staples = await getSheetValues(sheets[0]);
@@ -41,7 +41,7 @@ async function objectifyData() {
 
 async function getStaplesOnly() {
     try {
-        data = await objectifyData();
+        data = await staplesData();
         parsedArray = [];
 
         data.forEach(object => {

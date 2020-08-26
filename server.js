@@ -1,11 +1,14 @@
 const express = require('express');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const requestHandler = require('./sms/requestHandler');
+const { objectifyData } = require('./googleSheets/googleSheetsHandler');
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 app.post('/sms', async (req, res) => {
   const twiml = new MessagingResponse();
@@ -15,6 +18,13 @@ app.post('/sms', async (req, res) => {
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
+});
+
+app.get('/api/v2', async (req, res) => {
+  data = await objectifyData();
+
+  res.json(data);
+
 });
 
 let port = process.env.PORT;
