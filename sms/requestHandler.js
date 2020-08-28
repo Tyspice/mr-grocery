@@ -1,4 +1,4 @@
-const getCategoryData = require('./getCategoryData.js');
+const getCategoryData = require('./getCategoryData');
 const getStaplesOnly = require('./getStaplesOnly');
 
 async function requestHandler(request) {

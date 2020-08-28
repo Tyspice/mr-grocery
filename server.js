@@ -1,14 +1,19 @@
 const express = require('express');
+const path = require('path');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const requestHandler = require('./sms/requestHandler');
-const { objectifyData } = require('./googleSheets/googleSheetsHandler');
+const { groupBy } = require('./googleSheets/newSheetsHandler');
 const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, 'build')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.post('/sms', async (req, res) => {
   const twiml = new MessagingResponse();
@@ -20,8 +25,8 @@ app.post('/sms', async (req, res) => {
   res.end(twiml.toString());
 });
 
-app.get('/api/v2', async (req, res) => {
-  data = await objectifyData();
+app.get('/api/v2/data', async (req, res) => {
+  data = await groupBy('category');
   jsonData = await JSON.stringify(data);
   
   res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });

@@ -1,47 +1,8 @@
-const {
-    getSheetValues,
-    getRanges,
-    sheets
-} = require('../googleSheets/googleSheetsHandler.js');
-
-async function staplesData() {
-    try {
-        objArray = [];
-        staples = await getSheetValues(sheets[0]);
-        ranges = await getRanges();
-        //init category range obgects
-        ranges.forEach(range => {
-            objArray.push({
-                category: range,
-                items: []
-            })
-        });
-        //init end category
-        objArray.push({
-            category: 'No Category Given',
-            items: []
-        });
-
-        objArray.forEach(object => {
-            staples.forEach(staple => {
-                if ((object.category === staple[4]) && ((staple[1] === 'Out') || (staple[1] === 'Low'))) {
-                    object.items.push(`${staple[0]}*`)
-                } else if ((object.category === staple[4]) && (staple[1] === 'Could Get More')) {
-                    object.items.push(staple[0])
-                }
-            });
-        });
-        // console.log(oneTime);
-        return objArray;
-
-    } catch (error) {
-        console.log(error.message, error.stack);
-    }
-}
+const { getStaplesData } = require('../googleSheets/googleSheetsHandler.js');
 
 async function getStaplesOnly() {
     try {
-        data = await staplesData();
+        data = await getStaplesData();
         parsedArray = [];
 
         data.forEach(object => {
