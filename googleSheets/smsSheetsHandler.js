@@ -69,7 +69,7 @@ async function getRanges() {
 }
 
 
-async function objectifyData() {
+async function getSmsDataAll() {
     try {
         objArray = [];
         staples1 = await getSheetValues(sheets[0]);
@@ -114,7 +114,7 @@ async function objectifyData() {
     }
 }
 
-async function getStaplesData() {
+async function getSmsDataStaples() {
     try {
         objArray = [];
         staples = await getSheetValues(sheets[0]);
@@ -199,8 +199,8 @@ module.exports = {
     getSpreadSheet,
     getSheetValues,
     getRanges,
-    objectifyData,
-    getStaplesData,
+    getSmsDataAll,
+    getSmsDataStaples,
     getWebApiData,
     sheets
 }

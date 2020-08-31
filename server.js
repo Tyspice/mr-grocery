@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const requestHandler = require('./sms/requestHandler');
-const { groupBy } = require('./googleSheets/newSheetsHandler');
+const { groupBy } = require('./googleSheets/webApiSheetsHandler');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -27,7 +27,7 @@ app.post('/sms', async (req, res) => {
 
 app.get('/api/v2/data', async (req, res) => {
   data = await groupBy('category');
-  jsonData = await JSON.stringify(data);
+  jsonData = JSON.stringify(data);
   
   res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
   res.json(jsonData);

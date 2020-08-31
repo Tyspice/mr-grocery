@@ -1,8 +1,8 @@
-const { getStaplesData } = require('../googleSheets/googleSheetsHandler.js');
+const { getSmsDataStaples } = require('../googleSheets/smsSheetsHandler.js');
 
-async function getStaplesOnly() {
+async function getParsedSmsStringStaples() {
     try {
-        data = await getStaplesData();
+        data = await getSmsDataStaples();
         parsedArray = [];
 
         data.forEach(object => {
@@ -22,4 +22,4 @@ async function getStaplesOnly() {
     }
 }
 
-module.exports = getStaplesOnly;
+module.exports = getParsedSmsStringStaples;

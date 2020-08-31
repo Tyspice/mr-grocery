@@ -1,10 +1,9 @@
-const { objectifyData } = require('../googleSheets/googleSheetsHandler.js');
+const { getSmsDataAll } = require('../googleSheets/smsSheetsHandler');
 
 
-
-async function getCategoryData() {
+async function getParsedSmsStringAll() {
     try {
-        data = await objectifyData();
+        data = await getSmsDataAll();
         parsedArray = [];
 
         data.forEach(object => {
@@ -24,4 +23,4 @@ async function getCategoryData() {
     }
 }
 
-module.exports = getCategoryData;
+module.exports = getParsedSmsStringAll;

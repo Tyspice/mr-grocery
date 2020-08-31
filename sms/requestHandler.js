@@ -1,12 +1,12 @@
-const getCategoryData = require('./getCategoryData');
-const getStaplesOnly = require('./getStaplesOnly');
+const getParsedSmsStringAll = require('./getParsedSmsStringAll');
+const getParsedSmsStringStaples = require('./getParsedSmsStringStaples');
 
 async function requestHandler(request) {
     if (request.body.From === '+19706890776') {
-        let data = await getStaplesOnly();
+        let data = await getParsedSmsStringStaples();
         return data;
     } else {
-        let data = await getCategoryData();
+        let data = await getParsedSmsStringAll();
         return data;
     }
 }
