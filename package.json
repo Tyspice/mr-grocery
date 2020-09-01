@@ -1,6 +1,6 @@
 {
-  "name": "mr-grocery-v2",
-  "version": "2.0.0",
+  "name": "mr-grocery",
+  "version": "3.0.0",
   "description": "mr grocery at your sevice",
   "main": "server.js",
   "scripts": {
