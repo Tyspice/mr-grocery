@@ -6,12 +6,17 @@ const stapleItemsController = require('../controllers/stapleItemsController');
 
 router
     .route('/staple-items')
-    .get(stapleItemsController.getAllStaples);
+    .get(stapleItemsController.getAllStapleItems)
+    .post(stapleItemsController.createStapleItem)
+    .patch(stapleItemsController.updateStapleItem)
+    .delete(stapleItemsController.deleteStapleItem);
 
 router
     .route('/one-time-items')
     .get(oneTimeItemsController.getAllOneTimeItems)
-    .post(oneTimeItemsController.createOneTimeItem);
+    .post(oneTimeItemsController.createOneTimeItem)
+    .patch(oneTimeItemsController.updateOneTimeItem)
+    .delete(oneTimeItemsController.deleteOneTimeItem);
 
 
 module.exports = router;
