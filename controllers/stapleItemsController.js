@@ -13,18 +13,18 @@ exports.getAllStapleItems = async (req, res) => {
 }
 
 /***
-Creates a one staple item. request should be a JSON adhering to the schema:
-{   
-    item: String,
-    inventoryStatus: String,
-    updated: Date,
-    notes: String,
-    category: String,
-    house: Boolean,
-    staple: Boolean
-}
-Date and Staple values are automatically set and are not send in the request body
- ***/
+ * Creates a one staple item. request should be a JSON adhering to the schema:
+ * {   
+ *    item: String,
+ *    inventoryStatus: String,
+ *    updated: Date,
+ *    notes: String,
+ *    category: String,
+ *    house: Boolean,
+ *    staple: Boolean
+ * }
+ * Date and Staple values are automatically set and are not send in the request body
+ */
 
 exports.createStapleItem = async (req, res) => {
     const item = new StapleItem({

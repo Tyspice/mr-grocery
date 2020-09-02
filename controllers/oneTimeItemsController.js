@@ -14,15 +14,16 @@ exports.getAllOneTimeItems = async (req, res) => {
 }
 
 /***
-Creates a one time Item. request should be a JSON adhering to the schema:
-{   
-    item: String,
-    notes: String,
-    category: String,
-    house: Boolean,
-    staple: Boolean
-}
- ***/
+ * Creates a one time Item. request should be a JSON adhering to the schema:
+ * {   
+ *   item: String,
+ *   notes: String,
+ *   category: String,
+ *   house: Boolean,
+ *   staple: Boolean
+ * }
+ * 
+ */
 
 exports.createOneTimeItem = async (req, res) => {
     const item = new OneTimeItem({
