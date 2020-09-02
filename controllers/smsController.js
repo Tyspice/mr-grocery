@@ -1,8 +1,6 @@
 const requestHandler = require('../sms/requestHandler');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-
-
 exports.handleSmsRequest = async (req, res) => {
     const twiml = new MessagingResponse();
   

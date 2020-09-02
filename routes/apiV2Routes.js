@@ -4,7 +4,7 @@ const apiV2Controller = require('../controllers/apiV2Controller');
 router = express.Router();
 
 router
-    .route('/')
+    .route('/data')
     .get(apiV2Controller.getAllData);
 
 module.exports = router;

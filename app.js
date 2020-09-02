@@ -2,10 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const apiV2Router = require('./routes/apiV2Routes');
 const smsRouter = require('./routes/smsRoutes');
-const stapleItemsRouter = require('./routes/stapleItemsRoutes');
-const oneTimeItemsRouter = require('./routes/oneTimeItemsRoutes');
+const apiV2Router = require('./routes/apiV2Routes');
+const apiV3Router = require('./routes/apiV3Routes');
 
 const app = express();
 
@@ -20,9 +19,9 @@ app.get('/', (req, res) => {
 });
 
 //API END-POINT ROUTES
-app.use('/api/v2/data', apiV2Router);
 app.use('/sms', smsRouter);
-app.use('/api/v3/staple-items', stapleItemsRouter);
-app.use('/api/v3/one-time-items', oneTimeItemsRouter);
+app.use('/api/v2', apiV2Router);
+app.use('/api/v3', apiV3Router);
+
 
 module.exports = app;

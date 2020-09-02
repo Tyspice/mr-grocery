@@ -1,8 +1,8 @@
-const StapleItems = require('../models/stapleItemsModel');
+const StapleItem = require('../models/stapleItemsModel');
 
 exports.getAllStaples = async (req, res) => {
     try {
-        let staples = await StapleItems.find();
+        let staples = await StapleItem.find();
 
         res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json(staples);
