@@ -6,7 +6,6 @@ exports.getAllOneTimeItems = async (req, res) => {
     try {
         const oneTimeItems = await OneTimeItem.find();
 
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json(oneTimeItems);
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -35,7 +34,7 @@ exports.createOneTimeItem = async (req, res) => {
     });
     try {
         const newItem = await item.save();
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
         res.status(201).json({ newItem });
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -58,7 +57,6 @@ exports.updateOneTimeItem = async (req, res) => {
     try {
         const updatedItem = await OneTimeItem.findByIdAndUpdate(id, body, { new: true, useFindAndModify: false });
 
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json({ message: "Successfully Updated", newItem: updatedItem });
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -78,7 +76,6 @@ exports.deleteOneTimeItem = async (req, res) => {
     try {
         const item = await OneTimeItem.findByIdAndDelete(id);
         
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json({ message: "Successfully Deleted", removed: item });
         
     } catch (error) {

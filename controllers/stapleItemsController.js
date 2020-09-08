@@ -5,7 +5,6 @@ exports.getAllStapleItems = async (req, res) => {
     try {
         const stapleItems = await StapleItem.find();
 
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json(stapleItems);
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -38,7 +37,7 @@ exports.createStapleItem = async (req, res) => {
     });
     try {
         const newItem = await item.save();
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
         res.status(201).json({ newItem });
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -61,7 +60,6 @@ exports.updateStapleItem = async (req, res) => {
     try {
         const updatedItem = await StapleItem.findByIdAndUpdate(id, body, { new: true, useFindAndModify: false });
 
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json({ message: "Successfully Updated", newItem: updatedItem });
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -81,7 +79,6 @@ exports.deleteStapleItem = async (req, res) => {
     try {
         const item = await StapleItem.findByIdAndDelete(id);
         
-        res.set({ 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' });
         res.json({ message: "Successfully Deleted", removed: item });
         
     } catch (error) {
