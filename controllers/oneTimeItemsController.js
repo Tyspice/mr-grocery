@@ -71,10 +71,14 @@ exports.updateOneTimeItem = async (req, res) => {
  */
 
 exports.deleteOneTimeItem = async (req, res) => {
-    const id = req.body._id;
+    const idArray = req.body;
     
     try {
-        const item = await OneTimeItem.findByIdAndDelete(id);
+        const item = await OneTimeItem.deleteMany({
+            _id: {
+                $in: idArray
+            }
+        });
         
         res.json({ message: "Successfully Deleted", removed: item });
         
