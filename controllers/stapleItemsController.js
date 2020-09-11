@@ -1,4 +1,5 @@
 const StapleItem = require('../models/stapleItemsModel');
+const moment = require('moment');
 
 //Gets all staple items from the collection. does not take a request body
 exports.getAllStapleItems = async (req, res) => {
@@ -29,7 +30,7 @@ exports.createStapleItem = async (req, res) => {
     const item = new StapleItem({
         item: req.body.item,
         inventoryStatus: req.body.inventoryStatus,
-        updated: new Date(),
+        updated: moment().format('l'),
         notes: req.body.notes,
         category: req.body.category,
         house: req.body.house,
@@ -55,7 +56,7 @@ exports.createStapleItem = async (req, res) => {
 
 exports.updateStapleItem = async (req, res) => {
     const id = req.body._id;
-    const body = { ...req.body, updated: new Date() };
+    const body = { ...req.body, updated: moment().format('l') };
 
     try {
         const updatedItem = await StapleItem.findByIdAndUpdate(id, body, { new: true, useFindAndModify: false });

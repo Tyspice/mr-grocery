@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const StapleItemsSchema = new Schema({
     item: String,
     inventoryStatus: String,
-    updated: Date,
+    updated: String,
     notes: String,
     category: String,
     house: Boolean,
