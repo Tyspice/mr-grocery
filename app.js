@@ -16,15 +16,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 //enables cors requests for all routes
 app.use(cors());
 
-//HANDLES GET REQUEST FOR FRONT-END
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 //API END-POINT ROUTES
 app.use('/sms', smsRouter);
 app.use('/api/v2', apiV2Router);
 app.use('/api/v3', apiV3Router);
+
+//HANDLES GET REQUEST FOR FRONT-END
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 
 module.exports = app;
