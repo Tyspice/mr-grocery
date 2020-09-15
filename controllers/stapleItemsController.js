@@ -91,3 +91,19 @@ exports.deleteStapleItem = async (req, res) => {
         res.status(500).json({message: error.message});
     }
 }
+
+exports.bulkStatusUpdate = async (req, res) => {
+    const toUpdateArray = req.body;
+
+    try {
+        toUpdateArray.forEach( async (object) => {
+            let toUpdateObject = { ...object, updated: moment().format('l') };
+            await StapleItem.findByIdAndUpdate(toUpdateObject._id, toUpdateObject, { new: true, useFindAndModify: false });
+        });
+        
+
+        res.json({ message: "Successfully Updated" });
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}

@@ -18,5 +18,8 @@ router
     .patch(oneTimeItemsController.updateOneTimeItem)
     .delete(oneTimeItemsController.deleteOneTimeItem);
 
+router
+    .route('/bulk-status-update')
+    .patch(stapleItemsController.bulkStatusUpdate)
 
 module.exports = router;
