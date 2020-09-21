@@ -31,7 +31,7 @@ app.use(flash());
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'https://mr-grocery.herokuapp.com/auth/google/callback'
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 async (accessToken, refreshToken, profile, done) => {
     try {
