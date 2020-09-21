@@ -74,19 +74,25 @@ app.use(express.json());
 //enables cors requests for all routes
 app.use(cors());
 
+// app.get('/', isLoggedIn, (req, res, next) => {
+//     return next();
+// });
+
 app.get('/login',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', { 
-        failureRedirect: '/login'
-}));
+        failureRedirect: '/login',
+        successRedirect: '/'
+    })
+);
 
 
 //API END-POINT ROUTES
 app.use('/sms', smsRouter);
 app.use('/api/v2', apiV2Router);
-app.use('/api/v3', isLoggedIn, apiV3Router);
+app.use('/api/v3', apiV3Router);
 
 //HANDLES GET REQUEST FOR FRONT-END
 app.use(express.static(path.join(__dirname, 'build')));
