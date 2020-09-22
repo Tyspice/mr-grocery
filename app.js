@@ -1,6 +1,5 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
-const flash = require('connect-flash');
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -15,17 +14,20 @@ const apiV3Router = require('./routes/apiV3Routes');
 
 const app = express();
 
+// enables cors requests for all routes
+app.use(cors({
+    origin : "http://localhost:8000",
+    credentials: true,
+}));
+
 // cookieSession config
 app.use(cookieSession({ 
     maxAge: 24 * 60 * 60 * 1000, // One day in milliseconds
-    secret: process.env.COOKIE_KEY
+    keys: [process.env.COOKIE_KEY]
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-//flash messaging middleware
-app.use(flash());
 
 //STRATEGY CONFIG
 passport.use(new GoogleStrategy({
@@ -63,7 +65,7 @@ isLoggedIn = (req ,res, next) => {
     if(req.isAuthenticated()){
       return next();
     }else{
-      return res.redirect('/login');
+      res.send('you must log in');
   }
 }
 
@@ -71,9 +73,9 @@ isLoggedIn = (req ,res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-// app.get('/', isLoggedIn, (req, res, next) => {
-//     return next();
-// });
+app.get('/', isLoggedIn, (req, res, next) => {
+    return next();
+});
 
 app.get('/login',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
@@ -85,14 +87,10 @@ app.get('/auth/google/callback',
     })
 );
 
-//enables cors requests for all routes
-app.use(cors());
-
-
 //API END-POINT ROUTES
 app.use('/sms', smsRouter);
 app.use('/api/v2', apiV2Router);
-app.use('/api/v3', isLoggedIn, apiV3Router);
+app.use('/api/v3', apiV3Router);
 
 //HANDLES GET REQUEST FOR FRONT-END
 app.use(express.static(path.join(__dirname, 'build')));
