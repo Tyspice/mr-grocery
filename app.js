@@ -16,7 +16,7 @@ const app = express();
 
 // enables cors requests for localhost in dev
 app.use(cors({
-    origin : "http://localhost:8000",
+    origin : "http://localhost:3000",
     credentials: true,
 }));
 
