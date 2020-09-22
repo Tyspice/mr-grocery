@@ -14,7 +14,7 @@ const apiV3Router = require('./routes/apiV3Routes');
 
 const app = express();
 
-// enables cors requests for all routes
+// enables cors requests for localhost in dev
 app.use(cors({
     origin : "http://localhost:8000",
     credentials: true,
@@ -64,8 +64,8 @@ passport.deserializeUser((user, done) => {
 isLoggedIn = (req ,res, next) => {
     if(req.isAuthenticated()){
       return next();
-    }else{
-      res.send('you must log in');
+    } else{
+      res.send('you must log in before using this resource');
   }
 }
 
@@ -73,12 +73,22 @@ isLoggedIn = (req ,res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/',
+
+//root get request
+app.get('/', (req, res) => {
+    if(req.isAuthenticated()){
+        res.redirect('/app')
+      } else{
+        res.redirect('/login');
+    }
+});
+
+app.get('/login',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', { 
-        failureRedirect: '/',
+        failureRedirect: '/login',
         successRedirect: '/app'
     })
 );
