@@ -36,9 +36,8 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 async (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
     try {
-        const user = await User.find({id: profile.id});
+        const user = await User.find({googleId: profile.id});
         if(user[0]){
             return done(null, user[0].name)
         } else {
