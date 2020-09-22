@@ -36,8 +36,9 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 async (accessToken, refreshToken, profile, done) => {
+    console.log(profile)
     try {
-        const user = await User.find({googleId: profile.id});
+        const user = await User.find({email: profile._json.email});
         if(user[0]){
             return done(null, user[0].name)
         } else {
@@ -84,7 +85,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login',
-    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.email'] }));
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', {
