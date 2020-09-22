@@ -36,16 +36,17 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 async (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
     try {
         const user = await User.find({id: profile.id});
         if(user[0]){
             return done(null, user[0].name)
         } else {
-            return done(null, false, { message: 'Incorrect username.' });
+            return done(null, false, {message: 'Incorrect username or password'});
         }
     } catch (error) {
         console.log(error);
-        return done(null, false, { message: 'something went wrong' });
+        return done(null, false, {message: 'something went wrong'});
     }
 }
 ));
@@ -87,7 +88,7 @@ app.get('/login',
     passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
 app.get('/auth/google/callback', 
-    passport.authenticate('google', { 
+    passport.authenticate('google', {
         failureRedirect: '/login',
         successRedirect: '/app'
     })
