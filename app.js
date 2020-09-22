@@ -102,7 +102,7 @@ app.use('/api/v3', isLoggedIn, apiV3Router);
 //HANDLES GET REQUEST FOR FRONT-END
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/app', isLoggedIn, (req, res) => {
+app.get('*', isLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
