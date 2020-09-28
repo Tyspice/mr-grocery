@@ -1,5 +1,5 @@
 const StapleItem = require('../models/stapleItemsModel');
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 //Gets all staple items from the collection. does not take a request body
 exports.getAllStapleItems = async (req, res) => {
@@ -56,7 +56,7 @@ exports.createStapleItem = async (req, res) => {
 
 exports.updateStapleItem = async (req, res) => {
     const id = req.body._id;
-    const body = { ...req.body, updated: moment().format('l') };
+    const body = { ...req.body, updated: moment().tz("America/Los_Angeles").format('l') };
 
     try {
         const updatedItem = await StapleItem.findByIdAndUpdate(id, body, { new: true, useFindAndModify: false });
@@ -97,7 +97,7 @@ exports.bulkStatusUpdate = async (req, res) => {
 
     try {
         toUpdateArray.forEach( async (object) => {
-            let toUpdateObject = { ...object, updated: moment().format('l') };
+            let toUpdateObject = { ...object, updated: moment().tz("America/Los_Angeles").format('l') };
             await StapleItem.findByIdAndUpdate(toUpdateObject._id, toUpdateObject, { new: true, useFindAndModify: false });
         });
         
