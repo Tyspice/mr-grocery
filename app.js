@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 require('dotenv').config();
-const User = require('./models/users')
+const User = require('./models/users');
 
 const smsRouter = require('./routes/smsRoutes');
 const apiV2Router = require('./routes/apiV2Routes');
