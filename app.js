@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+const secure = require('express-force-https');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -19,6 +20,9 @@ app.use(cors({
     origin : "http://localhost:3000",
     credentials: true,
 }));
+
+//redirects http requests to https
+app.use(secure);
 
 // cookieSession config
 app.use(cookieSession({ 
